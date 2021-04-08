@@ -46,7 +46,7 @@ void downHeap(HeapType *h)
     h->heap[parent] = temp;
 }
 
-void insertItem(HeapType *h, int key)
+void insert_Item(HeapType *h, int key)
 {
     h->heap_size += 1;
     h->heap[h->heap_size] = key;
@@ -63,7 +63,7 @@ int removeMin(HeapType *h)
     return key; //key값을 리턴
 }
 
-void printHeap(HeapType *h)
+void print_heap(HeapType *h)
 {
     for(int i = 1; i<= h->heap_size; i++)
         printf("[%d] ", h->heap[i]);
@@ -91,20 +91,27 @@ void printArray(int list[], int n)
     printf("\n");
 }
 
+void inPlaceHeapSort(HeapType* h)
+{
+    int size = h->heap_size;
+    int key;
+    for(int i=0; i < size;i++)
+    {
+        key = removeMin(h);
+        h->heap[h->heap_size + 1] = key;
+    }
+}
+
 int main()
 {
     HeapType heap;
     int list[MAX_ELEMENT] = {0};
+    srand(time(NULL));
     init(&heap);
-    insertItem(&heap, 5);
-    insertItem(&heap, 3);
-    insertItem(&heap, 7);
-    insertItem(&heap, 4);
-    insertItem(&heap, 1);
-
-    printHeap(&heap);
-    heapSort(&heap, list);
-    printArray(list, heap.heap_size);
-    //printf("deleted key : %d\n", removeMin(&heap));
-    //printHeap(&heap);
+    for(int i=0; i < 15; i++)
+        insert_Item(&heap, rand()%100);
+    print_heap(&heap);
+    inPlaceHeapSort(&heap);
+    for(int i=1;heap.heap[i]>0;i++)
+        printf("[%d]", heap.heap[i]);
 }
