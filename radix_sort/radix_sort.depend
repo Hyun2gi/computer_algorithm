@@ -1,0 +1,6 @@
+# depslib dependency file v1.0
+1618948579 source:c:\users\이현정\desktop\3-1\컴알\computer_algorithm\radix_sort\main.c
+	<stdio.h>
+	<stdlib.h>
+	<time.h>
+
