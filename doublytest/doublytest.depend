@@ -1,0 +1,5 @@
+# depslib dependency file v1.0
+1619245005 source:c:\users\이현정\desktop\3-1\컴알\computer_algorithm\doublytest\main.c
+	<stdio.h>
+	<stdlib.h>
+

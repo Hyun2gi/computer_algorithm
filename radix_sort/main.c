@@ -44,6 +44,35 @@ element dequeue(QueueType*q)
     return q->data[q->front];
 }
 
+void queue_print(QueueType* q)
+{
+    if(!is_empty(q))
+    {
+        int i = q->front;
+        do{
+            i = (i+1) % MAX_SIZE;
+            printf("%d | ", q->data[i]);
+            if(i == q->rear)
+                break;
+        }while(i != q->front);
+    }
+    printf("\n");
+}
+
+
+void print_buckets(QueueType queues[])
+{
+    printf("==============================\n");
+    for(int b = 0; b < BUCKETS;b++)
+    {
+        printf("[%d] => ", b);
+        queue_print(&queues[b]);
+    }
+    printf("\n=================\n");
+}
+
+
+
 void radix_Sort(int list[], int n)
 {
     int i, b, d, factor = 1;
@@ -56,6 +85,9 @@ void radix_Sort(int list[], int n)
     {
         for(i=0;i<n;i++)
             enqueue(&queues[(list[i] /factor) %10], list[i]);
+
+        print_buckets(queues);
+
         for(b = i =0;b < BUCKETS;b++)
             while(!is_empty(&queues[b]))
                 list[i] = dequeue(&queues[b]);
